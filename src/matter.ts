@@ -52,7 +52,7 @@ export function Game() {
     isDropping = false;
   }
 
-  function createNewShape(x) {
+  function createNewShape(x: number) {
     // 衝突フィルターを含むオプション
     const options = {
       collisionFilter: {
