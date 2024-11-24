@@ -37,13 +37,13 @@ export function Game() {
   Render.run(render);
   Runner.run(Runner.create(), engine);
 
-  const boxes = [];
+  const boxes: any = [];
   let score = 0;
-  let currentBody = null;
+  let currentBody: any = null;
   let isDropping = false;
 
   function clearBoxes() {
-    boxes.forEach((box) => Composite.remove(engine.world, box));
+    boxes.forEach((box: any) => Composite.remove(engine.world, box));
     boxes.length = 0;
     if (currentBody) {
       Composite.remove(engine.world, currentBody);
@@ -116,7 +116,7 @@ export function Game() {
   });
 
   Events.on(engine, "afterUpdate", () => {
-    boxes.forEach((box) => {
+    boxes.forEach((box: any) => {
       if (box.position.y > 700) {
         clearBoxes();
         score = 0;
