@@ -65,16 +65,15 @@ export async function Game() {
     const verticesKey = verticesKeys[index];
     const verticesValue = verticesData[verticesKey];
 
-    const pngFileName = `/src/assets/png/${verticesKey.replace(
-      ".svg",
-      ".png"
-    )}`;
+    const pngFileName = `${verticesKey.replace(".svg", ".png")}`;
+    const pngFileModule = pngFiles[pngFileName];
+    const pngFile = pngFileModule?.default;
 
     const shape = Bodies.fromVertices(x, 100, verticesValue, {
       label: "box",
       render: {
         sprite: {
-          texture: pngFileName,
+          texture: pngFile,
           xScale: 0.5,
           yScale: 0.5,
         },
