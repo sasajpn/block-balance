@@ -11,6 +11,8 @@ export function createGround(canvas: HTMLCanvasElement) {
     25,
     {
       isStatic: true,
+      friction: 1.0,
+      frictionStatic: 1.0,
       render: {
         fillStyle: "#EE82EE",
       },
@@ -26,8 +28,10 @@ export function createKanji(
 ) {
   const body = Bodies.fromVertices(x, y, vertexSets, {
     label: "kanji",
-    friction: 0.5,
+    friction: 1.0,
+    frictionStatic: 1.0,
     frictionAir: 0.03,
+    restitution: 0.0,
     render: {
       opacity: 0.5,
       sprite: {

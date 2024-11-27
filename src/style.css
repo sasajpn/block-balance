@@ -10,11 +10,13 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
 }
+
 #kanjiTower {
-  display: block;
   max-width: 500px;
   width: 100%;
   height: auto;
+  max-height: 100%;
 }
