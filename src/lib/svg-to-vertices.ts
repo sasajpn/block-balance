@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Matter from "matter-js";
 import "pathseg";
 

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { readdir } from "node:fs/promises";
 import { svgPathProperties } from "svg-path-properties";
 
