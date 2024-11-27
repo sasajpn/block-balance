@@ -1,7 +1,15 @@
-import Matter from "matter-js";
+// @ts-nocheck
 
-export function Game() {
-  const { Engine, Render, Runner, Bodies, Composite, Events } = Matter;
+import Matter from "matter-js";
+import "pathseg";
+
+import pngFiles from "./assets/png";
+import verticesData from "./assets/vertices.json";
+
+const verticesKeys = Object.keys(verticesData);
+
+export async function Game() {
+  const { Body, Engine, Render, Runner, Bodies, Composite, Events } = Matter;
 
   const engine = Engine.create();
 
@@ -28,7 +36,7 @@ export function Game() {
     },
     collisionFilter: {
       category: defaultCategory,
-      mask: droppedCategory | defaultCategory, // 落下中のボディとのみ衝突
+      mask: droppedCategory | defaultCategory,
     },
   });
 
@@ -53,23 +61,32 @@ export function Game() {
   }
 
   function createNewShape(x: number) {
-    // 衝突フィルターを含むオプション
-    const options = {
+    const index = Math.floor(Math.random() * verticesKeys.length);
+    const verticesKey = verticesKeys[index];
+    const verticesValue = verticesData[verticesKey];
+
+    const pngFileName = `/src/assets/png/${verticesKey.replace(
+      ".svg",
+      ".png"
+    )}`;
+
+    const shape = Bodies.fromVertices(x, 100, verticesValue, {
+      label: "box",
+      render: {
+        sprite: {
+          texture: pngFileName,
+          xScale: 0.5,
+          yScale: 0.5,
+        },
+      },
       collisionFilter: {
         category: waitingCategory,
-        mask: defaultCategory, // 待機中は地面とのみ衝突可能
+        mask: defaultCategory,
       },
-    };
+    });
 
-    const shape =
-      Math.random() < 0.5
-        ? Bodies.rectangle(x, 100, 80, 80, options)
-        : Bodies.circle(x, 100, 40, options);
-
-    Matter.Body.setVelocity(shape, { x: 0, y: 0 });
-    Matter.Body.setAngularVelocity(shape, 0);
-
-    Composite.add(engine.world, shape);
+    Body.scale(shape, 0.5, 0.5);
+    Composite.add(engine.world, [shape]);
     return shape;
   }
 
