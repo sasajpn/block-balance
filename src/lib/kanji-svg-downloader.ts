@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 links.forEach((link, index) => {
   const url = link.href;
   const match = url.match(/([^\/]+\.svg)$/);
