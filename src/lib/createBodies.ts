@@ -26,6 +26,8 @@ export function createKanji(
 ) {
   const body = Bodies.fromVertices(x, y, vertexSets, {
     label: "kanji",
+    friction: 0.5,
+    frictionAir: 0.03,
     render: {
       opacity: 0.5,
       sprite: {

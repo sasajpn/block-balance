@@ -30,9 +30,9 @@ export async function Game() {
   Render.run(render);
   Runner.run(Runner.create(), engine);
 
-  let currentBody = createNewShape(400);
+  let currentBody = createNewShape();
 
-  function createNewShape(x: number) {
+  function createNewShape(x: number = canvas.width / 2) {
     const { verticesValue, pngFile } = getKanjiData();
     const shape = createKanji(x, 100, verticesValue, pngFile);
     Composite.add(engine.world, [shape]);
@@ -51,7 +51,7 @@ export async function Game() {
       if (body.position.y > 1200 && body.label === "kanji") {
         Composite.clear(engine.world, false);
         Composite.add(engine.world, [ground]);
-        currentBody = createNewShape(400);
+        currentBody = createNewShape();
       }
     });
   });
