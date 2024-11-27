@@ -67,21 +67,22 @@ export async function Game() {
     context.fillText(`Score: ${score}`, 10, 30);
   });
 
-  document.addEventListener("mousemove", (event) => {
+  canvas.addEventListener("mousemove", (event) => {
     handleMove(event, render, currentBody);
   });
 
-  document.addEventListener("mousedown", () => {
+  canvas.addEventListener("mousedown", () => {
     handleDrop(currentBody);
     currentBody = createNewShape(currentBody.position.x);
   });
 
-  document.addEventListener("touchmove", (event) => {
+  canvas.addEventListener("touchmove", (event) => {
     event.preventDefault();
     handleMove(event, render, currentBody);
   });
 
-  document.addEventListener("touchstart", () => {
+  canvas.addEventListener("touchend", (event) => {
+    event.preventDefault();
     handleDrop(currentBody);
     currentBody = createNewShape(currentBody.position.x);
   });
